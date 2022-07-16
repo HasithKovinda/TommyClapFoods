@@ -1,0 +1,81 @@
+﻿@page
+@model AbbyWeb.Pages.Customer.Home.IndexModel
+
+
+	<div id="carouselExampleCaptions" class="carousel container slide  mb-3" data-bs-ride="carousel">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="~/images/1.jpg" class="d-block w-100 img-fluid" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 >WellCome to The TommyClap Foods</h5>
+        <p>Harry Up An Make The Order</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="~/images/2.jpg" class="d-block w-100 img-fluid" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Fresh Foods</h5>
+        <p>You can Order fresh food from our online platform</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="~/images/3.jpg" class="d-block w-100 img-fluid" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>24 hour Service</h5>
+        <p>Order! We are deliver it within 24 hours.</p>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+<div class="row container-fluid pb-3 backgroundWhite">
+	@foreach(var category in Model.CategoryList){
+	<h2 class="text-success pl-1"><b>@category.Name</b></h2>
+	<div class="col-12">
+		<div class="row my-3">
+			@foreach(var menuItem in Model.MenuItemList.Where(u=>u.CategoryId==category.Id)){
+
+				<div class="col-lg-4 col-md-6 pb-4 filter">
+					<div class="card bg-white rounded shadow-sm" style="border:1px solid #222">
+						<div class="card-body pb-1 row">
+							<div class="col-8 h5">@menuItem.Name</div>
+							<div class="col-4 text-end"><span class="text-info h4">$@menuItem.Price</span></div>
+						</div>
+						<img class="card-img-top img-fluid d-block mx-auto mb-3 rounded" src="@menuItem.Image" alt="menuitem image">
+						<div class="card-body p-1 px-3 row">
+							<div class="col-6">
+								<span class="badge p-2 border w-100 text-dark bg-warning ">@menuItem.Category.Name</span>
+							</div>
+							<div class="col-6 border-0">
+								<span class="badge p-2 border w-100 bg-info ">@menuItem.FoodType.Name</span>
+							</div>
+							<div class="col-12 pt-2" style="font-size:13px; text-align:justify">
+								<p> @Html.Raw(menuItem.Description)</p>
+							</div>
+							<div class="col-12 p-1">
+								<a asp-page="Details" asp-route-id="@menuItem.Id" class="btn btn-dark form-control btn-sm p-2" style="height:40px">View Details</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			}
+		</div>
+	</div>
+	}
+</div>
